@@ -72,7 +72,7 @@ jobs:
   job_build_passwall:
     name: Build passwall
     needs: job_check
-    if: needs.job_check.outputs.has_update == 'true'
+    #if: needs.job_check.outputs.has_update == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Install packages
@@ -169,7 +169,7 @@ jobs:
 
 
   job_auto_compile:
-    if: needs.job_check.outputs.has_update == 'true'
+    #if: needs.job_check.outputs.has_update == 'true'
     needs: job_check
     runs-on: ubuntu-latest
     name: build (${{ matrix.platform }})
