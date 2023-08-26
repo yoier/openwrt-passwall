@@ -91,7 +91,7 @@ jobs:
           key: openwrt-sdk-21.02-x86_64
 
       - name: Initialization environment
-        if: steps.cache-sdk.outputs.cache-hit != 'true'
+        #if: steps.cache-sdk.outputs.cache-hit != 'true'
         env:
           url_sdk: https://archive.openwrt.org/releases/21.02.5/targets/x86/64/openwrt-sdk-21.02.5-x86-64_gcc-8.4.0_musl.Linux-x86_64.tar.xz
         run: |
@@ -169,7 +169,7 @@ jobs:
 
 
   job_auto_compile:
-    if: needs.job_check.outputs.has_update == 'true'
+    if: needs.job_check.outputs.has_update == 'true0'
     needs: job_check
     runs-on: ubuntu-latest
     name: build (${{ matrix.platform }})
