@@ -177,14 +177,14 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          #- platform: x86_64
-          #  url_sdk: https://downloads.openwrt.org/releases/22.03.3/targets/x86/64/openwrt-sdk-22.03.3-x86-64_gcc-11.2.0_musl.Linux-x86_64.tar.xz
+          - platform: x86_64
+            url_sdk: https://downloads.openwrt.org/releases/22.03.3/targets/x86/64/openwrt-sdk-22.03.3-x86-64_gcc-11.2.0_musl.Linux-x86_64.tar.xz
 
           #- platform: aarch64_generic
           #  url_sdk: https://downloads.openwrt.org/releases/22.03.3/targets/rockchip/armv8/openwrt-sdk-22.03.3-rockchip-armv8_gcc-11.2.0_musl.Linux-x86_64.tar.xz
 
-          - platform: aarch64_cortex-a53
-            url_sdk: https://downloads.openwrt.org/releases/22.03.3/targets/mvebu/cortexa53/openwrt-sdk-22.03.3-mvebu-cortexa53_gcc-11.2.0_musl.Linux-x86_64.tar.xz
+          #- platform: aarch64_cortex-a53
+          #  url_sdk: https://downloads.openwrt.org/releases/22.03.3/targets/mvebu/cortexa53/openwrt-sdk-22.03.3-mvebu-cortexa53_gcc-11.2.0_musl.Linux-x86_64.tar.xz
 
           #- platform: aarch64_cortex-a72
           #  url_sdk: https://downloads.openwrt.org/releases/22.03.3/targets/mvebu/cortexa72/openwrt-sdk-22.03.3-mvebu-cortexa72_gcc-11.2.0_musl.Linux-x86_64.tar.xz
