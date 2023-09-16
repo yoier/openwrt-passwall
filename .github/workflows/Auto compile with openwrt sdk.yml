@@ -13,7 +13,7 @@ on:
         default: 'false'
   push:
     branches:
-      - 'luci-smartdns-dev'
+      - 'mian'
     paths:
       - 'luci-app-passwall/Makefile'
 env:
@@ -34,7 +34,7 @@ jobs:
         uses: actions/checkout@main
         with:
           fetch-depth: 0
-          ref: 'luci-smartdns-dev'
+          ref: 'main'
 
       - name: Check version
         id: check_version
