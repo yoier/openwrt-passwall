@@ -85,12 +85,12 @@ jobs:
           sudo -E apt-get -qq autoremove --purge
           sudo -E apt-get -qq clean
 
-      - name: Cache openwrt SDK
-        id: cache-sdk
-        uses: actions/cache@v3
-        with:
-          path: sdk
-          key: openwrt-sdk-23.05-rc3-x86_64
+      #- name: Cache openwrt SDK
+      #  id: cache-sdk
+      #  uses: actions/cache@v3
+      #  with:
+      #    path: sdk
+      #    key: openwrt-sdk-23.05-rc3-x86_64
 
       - name: Initialization environment
         #if: steps.cache-sdk.outputs.cache-hit != 'true'
@@ -99,6 +99,7 @@ jobs:
         run: |
           wget ${{ env.url_sdk }}
           file_name=$(echo ${{env.url_sdk}} | awk -F/ '{print $NF}')
+          rm -rf sdk
           mkdir sdk && tar -xJf $file_name -C ./sdk --strip-components=1
           cd sdk
           echo "src-git base https://github.com/openwrt/openwrt.git;openwrt-23.05" > feeds.conf
