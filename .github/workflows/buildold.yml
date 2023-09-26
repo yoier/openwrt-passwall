@@ -161,11 +161,22 @@ jobs:
           echo "status=success" >> $GITHUB_OUTPUT
           echo "FIRMWARE=$PWD" >> $GITHUB_ENV
 
+      #- name: Upload passwall ipks to release
+      #  uses: softprops/action-gh-release@v1
+      #  if: steps.compile.outputs.status == 'success'
+      #  env:
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #  with:
+      #    tag_name: ${{needs.job_check.outputs.passwall_version}}
+      #    files: ${{ env.FIRMWARE }}/passwall/*.ipk
       - name: Upload passwall ipks to release
-        uses: softprops/action-gh-release@v1
+        uses: svenstaro/upload-release-action@v2
         if: steps.compile.outputs.status == 'success'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+           repo_token: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{needs.job_check.outputs.passwall_version}}
-          files: ${{ env.FIRMWARE }}/passwall/*.ipk
+          file: ${{ env.FIRMWARE }}/passwall/*.ipk
+          tag: ${{env.strDate}}
+          file_glob: true
+          overwrite: true
+          release_name: ${{needs.job_check.outputs.passwall_version}}_${{env.strDate}}
