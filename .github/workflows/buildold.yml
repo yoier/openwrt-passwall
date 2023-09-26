@@ -176,7 +176,7 @@ jobs:
            repo_token: ${{ secrets.GITHUB_TOKEN }}
         with:
           file: ${{ env.FIRMWARE }}/passwall/*.ipk
-          tag: $(TZ=UTC-8 date +%Y-%m-%d)
+          tag: ${{needs.job_check.outputs.passwall_version}}
           file_glob: true
           overwrite: true
-          release_name: ${{needs.job_check.outputs.passwall_version}}_$(TZ=UTC-8 date +%Y-%m-%d)
+          release_name: ${{needs.job_check.outputs.passwall_version}}
