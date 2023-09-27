@@ -59,10 +59,10 @@ jobs:
         #if: steps.check_version.outputs.has_update == 'true'
         run: |
           echo "## :mega:Update content" >> release.txt
-          echo "![](https://img.shields.io/github/downloads/${{ env.passwall }}/${{steps.check_version.outputs.latest_version}}/total?style=flat-square)" >> release.txt
+          #echo "![](https://img.shields.io/github/downloads/${{ env.passwall }}/${{steps.check_version.outputs.latest_version}}/total?style=flat-square)" >> release.txt
           echo "### Passwall Info" >> release.txt
-          echo "**:minidisc: Passwall Version: ${{steps.check_version.outputs.latest_version}}**" >> release.txt
-          echo "**:gear: OpenWrt SDK Version: 23.05-rc3**" >> release.txt
+          echo "**:minidisc: Passwall Version: ${{steps.check_version.outputs.latest_release}}**" >> release.txt
+          echo "**:gear: OpenWrt SDK Version: 21.02.5**" >> release.txt
           touch release.txt
 
       - name: Generate new tag & release
