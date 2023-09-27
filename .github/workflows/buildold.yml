@@ -29,6 +29,7 @@ jobs:
     outputs:
       passwall_version: ${{ steps.check_version.outputs.latest_version }}
       has_update: ${{ steps.check_version.outputs.has_update }}
+      latest_release: ${{ steps.check_version.outputs.latest_release }}
     steps:
       - name: Checkout
         uses: actions/checkout@main
@@ -47,6 +48,7 @@ jobs:
           has_update=$([ "${latest_version}" != "${latest_release}" ] && echo true || echo false)
           echo "latest_version=${latest_version}" >> $GITHUB_OUTPUT
           echo "has_update=${has_update}" >> $GITHUB_OUTPUT
+          echo "latest_release=${latest_release}" >> $GITHUB_OUTPUT
           echo "latest_version: ${latest_version}"
           echo "latest_release: ${latest_release}"
           echo "has_update: ${has_update}"
@@ -176,7 +178,7 @@ jobs:
            repo_token: ${{ secrets.GITHUB_TOKEN }}
         with:
           file: ${{ env.FIRMWARE }}/passwall/*.ipk
-          tag: ${{needs.job_check.outputs.passwall_version}}
+          tag: ${{needs.job_check.outputs.latest_release}}
           file_glob: true
           overwrite: true
-          release_name: ${{needs.job_check.outputs.passwall_version}}
+          release_name: ${{needs.job_check.outputs.latest_release}}
