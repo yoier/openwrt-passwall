@@ -30,7 +30,7 @@ jobs:
       passwall_version: ${{ steps.check_version.outputs.latest_version }}
       has_update: ${{ steps.check_version.outputs.has_update }}
       latest_release: ${{ steps.check_version.outputs.latest_release }}
-      strDate: ${{ steps.check_version.outputs.strDate }}
+      #strDate: ${{ steps.check_version.outputs.strDate }}
     steps:
       - name: Checkout
         uses: actions/checkout@main
@@ -47,7 +47,7 @@ jobs:
           latest_version=$(awk -F ':=' '/PKG_VERSION|PKG_RELEASE/ {print $2}' Makefile | sed ':a;N;s/\n$//;s/\n/-/;ba')
           latest_release=$(wget -qO- -t1 -T2 ${{env.url_release}} | awk -F '"' '/tag_name/{print $4}')
           has_update=$([ "${latest_version}" != "${latest_release}" ] && echo true || echo false)
-          echo "strDate=$(TZ=UTC-8 date +%Y-%m-%d)" >> $GITHUB_OUTPUT
+          #echo "strDate=$(TZ=UTC-8 date +%Y-%m-%d)" >> $GITHUB_OUTPUT
           echo "latest_version=${latest_version}" >> $GITHUB_OUTPUT
           echo "has_update=${has_update}" >> $GITHUB_OUTPUT
           echo "latest_release=${latest_release}" >> $GITHUB_OUTPUT
@@ -61,7 +61,7 @@ jobs:
           echo "## :mega:Update content" >> release.txt
           #echo "![](https://img.shields.io/github/downloads/${{ env.passwall }}/${{steps.check_version.outputs.latest_version}}/total?style=flat-square)" >> release.txt
           echo "### Passwall Info" >> release.txt
-          echo "**:minidisc: Passwall Version: ${{steps.check_version.outputs.latest_release}}**" >> release.txt
+          echo "**:minidisc: Passwall Version: ${{steps.check_version.outputs.latest_release}}-smartdns-dev**" >> release.txt
           echo "**:gear: OpenWrt SDK Version: 21.02.5**" >> release.txt
           touch release.txt
 
@@ -71,7 +71,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{steps.check_version.outputs.latest_release}}_${{steps.check_version.outputs.strDate}}
+          tag_name: ${{steps.check_version.outputs.latest_release}}-smartdns-dev
           body_path: release.txt
 
 
@@ -183,4 +183,4 @@ jobs:
           tag: ${{needs.job_check.outputs.latest_release}}
           file_glob: true
           overwrite: true
-          release_name: ${{needs.job_check.outputs.latest_release}}_${{needs.job_check.outputs.strDate}}
+          release_name: ${{needs.job_check.outputs.latest_release}}-smartdns-dev
