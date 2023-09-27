@@ -180,7 +180,7 @@ jobs:
            repo_token: ${{ secrets.GITHUB_TOKEN }}
         with:
           file: ${{ env.FIRMWARE }}/passwall/*.ipk
-          tag: ${{needs.job_check.outputs.latest_release}}
+          tag: ${{needs.job_check.outputs.latest_release}}-smartdns-dev
           file_glob: true
           overwrite: true
           release_name: ${{needs.job_check.outputs.latest_release}}-smartdns-dev
