@@ -37,12 +37,12 @@ jobs:
       - name: Check version
         id: check_version
         env:
-          url_release: https://api.github.com/repos/${{ env.passwall }}/releases/latest
-          url_lastest_version: https://raw.githubusercontent.com/xiaorouji/openwrt-passwall/luci-smartdns-dev/luci-app-passwall/Makefile
+          url_release: https://api.github.com/repos/yoier/passwall-smartdns-dev-build/releases/latest
+          url_lastest_version: https://raw.githubusercontent.com/xiaorouji/openwrt-passwall/${{ github.event.inputs.branch }}/luci-app-passwall/Makefile
         run: |
           cd luci-app-passwall
-          latest_version=$(wget -qO- -t1 -T2 ${{env.url_lastest_version}} | awk -F ':=' '/PKG_VERSION|PKG_RELEASE/ {print $2}' | sed ':a;N;s/\n$//;s/\n/-/;ba')
-          latest_release=$(wget -qO- -t1 -T2 ${{env.url_release}} | awk -F '"' '/tag_name/{print $4}' | awk -F '-' '{print $1}' )
+          latest_version=$(wget -qO- -t1 -T2 ${{env.url_lastest_version}} | awk -F ':=' '/PKG_VERSION|PKG_RELEASE/ {print $2; count++} count == 2 {exit}}' | sed ':a;N;s/\n$//;s/\n/-/;ba')
+          latest_release=$(wget -qO- -t1 -T2 ${{env.url_release}} | awk -F '"' '/tag_name/{print $4}' | sed -E 's/(.*)-.*/\1/' )
           has_update=$([ "${latest_version}" != "${latest_release}" ] && echo true || echo false)
           echo "latest_version=${latest_version}" >> $GITHUB_OUTPUT
           echo "has_update=${has_update}" >> $GITHUB_OUTPUT
@@ -53,8 +53,6 @@ jobs:
       - name: Prepare release
         if: steps.check_version.outputs.has_update == 'true'
         run: |
-          echo "## :mega:Update content" >> release.txt
-          echo "![](https://img.shields.io/github/downloads/yoier/passwall-smartdns-dev-build/${{steps.check_version.outputs.latest_version}}/total?style=flat-square)" >> release.txt
           echo "### Passwall Info" >> release.txt
           echo "**:minidisc: Passwall Version: ${{steps.check_version.outputs.latest_version}}**" >> release.txt
           touch release.txt
