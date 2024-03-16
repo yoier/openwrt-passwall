@@ -11,6 +11,7 @@ on:
         description: 'branch'
         required: false
         default: 'luci-smartdns-dev'
+        type: choice
         options:
         - luci-smartdns-dev
         - main
