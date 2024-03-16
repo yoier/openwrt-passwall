@@ -11,7 +11,9 @@ on:
         description: 'branch'
         required: false
         default: 'luci-smartdns-dev'
-        
+        options:
+        - luci-smartdns-dev
+        - main
 env:
   TZ: Asia/Shanghai
   passwall: xiaorouji/openwrt-passwall
