@@ -95,6 +95,7 @@ jobs:
           sudo -E apt-get -qq clean
 
       - name: Cache openwrt SDK
+        if: false
         id: cache-sdk
         uses: actions/cache@v4
         with:
