@@ -2,4 +2,6 @@
 
 依赖同passwall [xiaorouji/openwrt-passwall/releases](https://github.com/xiaorouji/openwrt-passwall/releases)
 
+需要安装smartdns后才会有dns分流选项:
+
 ![imag dns分流选项](https://github.com/yoier/passwall-smartdns-dev-build/blob/luci-smartdns-new-version/img/1.png)
