@@ -33,8 +33,8 @@ jobs:
     steps:
       - name: Check branch
         if: ${{ github.event.inputs.branch }}
-        run: |
-          env.branch=${{ github.event.inputs.branch }}
+        env:
+          branch: ${{ github.event.inputs.branch }}
       - name: Checkout
         uses: actions/checkout@main
         with:
