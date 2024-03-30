@@ -35,6 +35,8 @@ jobs:
         if: ${{ github.event.inputs.branch }}
         env:
           branch: ${{ github.event.inputs.branch }}
+        run: |
+          echo "branch: ${{env.branch}}"
       - name: Checkout
         uses: actions/checkout@main
         with:
@@ -53,7 +55,6 @@ jobs:
           has_update=$([ "${latest_version}" != "${latest_release}" ] && echo true || echo false)
           echo "latest_version=${latest_version}" >> $GITHUB_OUTPUT
           echo "has_update=${has_update}" >> $GITHUB_OUTPUT
-          echo "branch: ${{env.branch}}"
           echo "latest_version: ${latest_version}"
           echo "latest_release: ${latest_release}"
           echo "has_update: ${has_update}"
