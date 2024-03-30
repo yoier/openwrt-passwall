@@ -5,13 +5,13 @@
 name: "Auto compile with openwrt sdk"
 on:
   schedule:
-    - cron: "30 23 */4 * *"
+    - cron: "30 23 * * 0"
   repository_dispatch:
   workflow_dispatch:
     inputs:
       branch:
         description: 'branch'
-        required: false
+        required: true
         default: 'luci-smartdns-dev'
         type: choice
         options:
@@ -21,6 +21,7 @@ env:
   TZ: Asia/Shanghai
   passwall: xiaorouji/openwrt-passwall
   packages: xiaorouji/openwrt-passwall-packages
+  branch: luci-smartdns-dev
 
 jobs:
   job_check:
@@ -30,6 +31,10 @@ jobs:
       passwall_version: ${{ steps.check_version.outputs.latest_version }}
       has_update: ${{ steps.check_version.outputs.has_update }}
     steps:
+      - name: Check branch
+        if: ${{ github.event.inputs.branch }}
+        run: |
+          env.branch=${{ github.event.inputs.branch }}
       - name: Checkout
         uses: actions/checkout@main
         with:
@@ -116,7 +121,7 @@ jobs:
           echo "src-git luci https://github.com/openwrt/luci.git;openwrt-${{ matrix.luci_ver }}" >> feeds.conf
           echo "src-git routing https://git.openwrt.org/feed/routing.git;openwrt-${{ matrix.sdk_ver }}"  >> feeds.conf
           echo "src-git passwall_packages https://github.com/${{ env.packages }}.git;main" >> feeds.conf
-          echo "src-git passwall https://github.com/${{ env.passwall }}.git;${{ github.event.inputs.branch }}" >> feeds.conf
+          echo "src-git passwall https://github.com/${{ env.passwall }}.git;${{ env.branch }}" >> feeds.conf
           ./scripts/feeds update -a
           echo "CONFIG_PACKAGE_luci-app-passwall=m" > .config
           ./scripts/feeds install -d n luci-app-passwall
