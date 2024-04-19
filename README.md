@@ -5,6 +5,7 @@
 需要安装[smartdns](https://github.com/pymumu/smartdns/releases)后才会有dns分流选项:
 
 ![imag dns分流选项](https://github.com/yoier/passwall-smartdns-dev-build/blob/luci-smartdns-new-version/img/1.png)<br>
+可直接绑定smartdns到53端口。
 <br>
 <br>
 <br>
