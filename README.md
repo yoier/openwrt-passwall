@@ -2,7 +2,7 @@
 
 依赖同passwall [xiaorouji/openwrt-passwall/releases](https://github.com/xiaorouji/openwrt-passwall/releases)
 
-需要安装[smartdns](https://github.com/pymumu/smartdns/releases)后才会有dns分流选项:
+需要安装[smartdns](https://github.com/pymumu/smartdns/releases)(compat版是为了向下兼容,23.05及以上安装后可能导致luci不显示smartdns服务)后才会有dns分流选项:
 
 ![imag dns分流选项](https://github.com/yoier/passwall-smartdns-dev-build/blob/luci-smartdns-new-version/img/1.png)<br>
 可直接绑定smartdns到53端口。
