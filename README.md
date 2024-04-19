@@ -7,7 +7,10 @@
 ![imag dns分流选项](https://github.com/yoier/passwall-smartdns-dev-build/blob/luci-smartdns-new-version/img/1.png)
 
 
+
+
 END:
+
 由于smartdns无法做到dns精准分流，dns由默认节点解析返回，实际访问时会使用自己设置的节点，导致dns解析和访问网站时不是同一节点。
 
 对于单个节点用户，多节点都在同一地区，多节点不同地区但不需要分流的的用户影响不大。
