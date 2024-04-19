@@ -4,11 +4,10 @@
 
 需要安装[smartdns](https://github.com/pymumu/smartdns/releases)后才会有dns分流选项:
 
-![imag dns分流选项](https://github.com/yoier/passwall-smartdns-dev-build/blob/luci-smartdns-new-version/img/1.png)
-
-
-
-
+![imag dns分流选项](https://github.com/yoier/passwall-smartdns-dev-build/blob/luci-smartdns-new-version/img/1.png)<br>
+<br>
+<br>
+<br>
 END:
 
 由于smartdns无法做到dns精准分流，dns由默认节点解析返回，实际访问时会使用自己设置的节点，导致dns解析和访问网站时不是同一节点。
