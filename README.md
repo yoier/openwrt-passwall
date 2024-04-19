@@ -9,7 +9,7 @@
 <br>
 <br>
 <br>
-END:
+# END:
 
 由于smartdns无法做到dns精准分流，dns由默认节点解析返回，实际访问时会使用自己设置的节点，导致dns解析和访问网站时不是同一节点。
 
@@ -19,9 +19,9 @@ END:
 
 目前本人使用主路由+旁路网关，passwall2在旁路网关，dhcp设置中关闭缓存，lan口自定义dns指向主路由;主路由安装smartdns并绑定53端口作为主dns。国内网站由smartdns解析，国外由xray分流解析。
 
-如果是局域网设备自行设置网关和dns，不使用dhcp统一分配可以忽略下面的内容。
+## 需要注意的是: 
 
-需要注意的是: 如果你在主路由dhcp选项设置了旁路网关和及其dns，当主路由设置smartdns为主dns时，smartdns会在dhcp选项中添加值，使局域网设备dns指向主路由，导致passwall2分流失效。
+如果你在主路由dhcp选项设置了旁路网关和及其dns，当设置smartdns为主dns时，smartdns会在dhcp选项中添加值，使局域网设备dns指向主路由，dhcp租约到期后，再次分配的dns会指向主路由，导致passwall2分流失效。
 
-解决方法:<br>
+## 解决方法:<br>
 在主路由上注释掉/etc/init.d/smartdns中的97和123行:<br># uci -q add_list dhcp.lan.dhcp_option="6,$hostip"<br># uci -q del_list dhcp.lan.dhcp_option="6,$hostip"
