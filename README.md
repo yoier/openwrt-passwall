@@ -1,10 +1,34 @@
  passwall-smartdns分支编译 [xiaorouji](https://github.com/xiaorouji/openwrt-passwall/tree/luci-smartdns-dev)<br>
 ~~依赖同passwall~~ [xiaorouji/openwrt-passwall/releases](https://github.com/xiaorouji/openwrt-passwall/releases)<br>
-xiaorouji大佬终于编译该版本，以后可能会发布正式版 [xiaorouji/openwrt-passwall/releases](https://github.com/xiaorouji/openwrt-passwall/releases)<br>该仓库已停止编译<br>
+xiaorouji大佬终于编译该版本，以后可能会发布正式版 [xiaorouji/openwrt-passwall/releases](https://github.com/xiaorouji/openwrt-passwall/releases)<br>该仓库已停止编译仅作教程<br>
 需要安装[smartdns](https://github.com/pymumu/smartdns/releases)(~~compat版是为了向下兼容,23.05及以上安装后可能导致luci不显示smartdns服务~~)后才会有dns分流选项:<br>
-![imag dns分流选项](https://github.com/yoier/passwall-smartdns-dev-build/blob/luci-smartdns-new-version/img/1.png)<br>
-可直接绑定smartdns到53端口。<br>
-<br>
+![imag dns分流选项](/img/1.png)<br>
+可直接绑定smartdns到53端口。<br><br>
+# 个人使用的配置
+## smartdns部分 ver: 1.2024.02.08-0828
+### 高级设置
+![imag dns配置1](/img/7.png)<br>
+![imag dns配置2](/img/8.png)<br>
+![imag dns配置3](/img/9.png)<br>
+### 常规设置
+![imag dns配置4](/img/5.png)<br>
+服务器名称可以自己改<br>
+isp和isp2的服务器ip根据运营商和地区填写<br>
+以下是常用[dns服务器列表](https://dns.iui.im/#telecom)<br>
+### 上游服务器设置
+![imag dns配置5](/img/6.png)<br>
+服务器组必须与passwall中国内分组名一致，我这里填的cn<br>
+从[默认服务器组排除](#从默认服务器组排除)选项后面有介绍
+## passwall部分 ver: 4.77-5-smartdns-dev
+### dns设置
+![imag dns1](/img/2.png)<br>
+过滤代理域名 IPv6勾选后将会过滤掉国外dns返回的IPv6解析结果，相当于只用IPv4代理。<br>
+勾选前:![imag cmd1](/img/11.png)<br>
+勾选后:![imag cmd2](/img/12.png)<br>
+### 从默认服务器组排除
+passwall中如果没有勾选，smartdns的上游服务器配置中都勾选了，就相当于默认dns为远程![imag dns1](/img/4.png)<br>
+相反如果passwall中勾选，smartdns的上游服务器配置中没有勾选，就相当于默认dns为直连![imag dns1](/img/3.png)<br>
+注意：默认dns为远程时，停止passwall后会导致dns不解析(因为smartdns没有规则时默认走default服务器组，passwall停止运行后，上游服务器只设置了cn，导致dns不解析。使用直连dns就不会存在这个问题)，使用时确保两者同时运行。<br>
 <br>
 <br>
 # END:<br>
